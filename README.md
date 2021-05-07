@@ -2,9 +2,9 @@
 New Idea! Snake Game!
 
 ## Building
-gcc -c game.c
-gcc -o snake snake.c game.o
-./snake
+* gcc -c game.c
+* gcc -o snake snake.c game.o
+* ./snake
 
 ## Instructions
 The controls are typical of Snake Game:
