@@ -10,3 +10,4 @@ New Idea! Snake Game!
 The controls are typical of Snake Game:
 * ⏴⏵⏶⏷ : Move snake,
 * P : Pause game,
+* ESC : Exit program.
