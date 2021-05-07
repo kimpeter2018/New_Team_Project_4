@@ -1,5 +1,5 @@
 # New_Team_Project_4
-New Idea!
+New Idea! Snake Game!
 
 ## Building
 gcc -c game.c
