@@ -1,5 +1,8 @@
-#실행 파일
+#ignore executive file
 *.exe
 
-#text파일
+#ignore text file
 *.txt
+
+#ignore object files
+*.o
