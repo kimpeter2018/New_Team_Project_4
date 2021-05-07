@@ -6,5 +6,5 @@ gcc
 
 ## Instructions
 The controls are typical of Snake Game:
-* °Á and °Ê and °Ë and °È : Move snake,
+* ‚è¥‚èµ‚è∂‚è∑ : Move snake,
 * P : Pause game,
