@@ -1,4 +1,6 @@
 #include"game.h"
+#include"user.h"
+#include"manager.h"
 
 void gotoxy(int x,int y,char* s) { //x값을 2x로 변경, 좌표값에 바로 문자열을 입력할 수 있도록 printf함수 삽입  
     COORD pos={2*x,y};
@@ -11,6 +13,10 @@ int main(){
     Game s[100];
     title(s);
     
+    Users ulist[100];
+    int curcount = 0;
+    int count = 0, menu;
+
     while(1){
         if(kbhit()) do{s->key=getch();} while(s->key==224); //키 입력받음
         Sleep(s->speed);
@@ -39,7 +45,8 @@ int main(){
         move(s, s->dir); 
         
         if(s->status_on==1) status(s); // status표시 
-    }    
+    }
+        
 }
     
 ///////////////////////////MAIN END////////////////////////////////
