@@ -1,10 +1,16 @@
 #include"game.h"
+#include"user.h"
+#include"manager.h"
 
 ////////////////////////////MAIN START//////////////////////////////
 int main(){
     Game s[100];
     title(s);
     
+    Users ulist[100];
+    int curcount = 0;
+    int count = 0, menu;
+
     while(1){
         if(kbhit()) do{s->key=getch();} while(s->key==224); //키 입력받음
         Sleep(s->speed);
@@ -33,7 +39,8 @@ int main(){
         move(s, s->dir); 
         
         if(s->status_on==1) status(s); // status표시 
-    }    
+    }
+        
 }
     
 ///////////////////////////MAIN END////////////////////////////////

@@ -1,0 +1,8 @@
+#ignore executive file
+*.exe
+
+#ignore text file
+*.txt
+
+#ignore object files
+*.o
