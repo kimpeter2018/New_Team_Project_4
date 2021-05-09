@@ -1,4 +1,5 @@
 #include"game.h"
+#include"user.h"
 
 void title(Game *s){
     int i,j;
@@ -71,7 +72,7 @@ void draw_map(Game *s){ //�� �׵θ� �׸��� �Լ�
     }
 }
  
-void move(Game *s, int dir){
+void move(Game *s, int dir, Users *ulist){
     int i;
  
     if(s->x[0]==s->food_x&&s->y[0]==s->food_y){ //food�� �浹���� ��� 
@@ -82,13 +83,13 @@ void move(Game *s, int dir){
         s->y[s->length-1]=s->y[s->length-2];
     }
     if(s->x[0]==0||s->x[0]==MAP_WIDTH-1||s->y[0]==0||s->y[0]==MAP_HEIGHT-1){ //���� �浹���� ��� 
-        game_over(s);
+        game_over(s, ulist);
         return; //game_over���� ������ �ٽ� �����ϰ� �Ǹ� ���⼭���� �ݺ��ǹǷ� 
                 //return�� ����Ͽ� move�� ������ �κ��� ������� �ʵ��� �մϴ�. 
     }
     for(i=1;i<s->length;i++){ //�ڱ���� �浹�ߴ��� �˻� 
         if(s->x[0]==s->x[i]&&s->y[0]==s->y[i]){
-            game_over(s);
+            game_over(s, ulist);
             return;
         }
     }
@@ -129,7 +130,7 @@ void pause(Game *s){ // pŰ�� ������ ��� ������
     }
 }
  
-void game_over(Game *s){ //�������� �Լ� 
+void game_over(Game *s, Users *ulist){ //�������� �Լ� 
     gotoxy(MAP_X+(MAP_WIDTH/2)-6,MAP_Y+5,"+----------------------+");
     gotoxy(MAP_X+(MAP_WIDTH/2)-6,MAP_Y+6,"|      GAME OVER..     |");
     gotoxy(MAP_X+(MAP_WIDTH/2)-6,MAP_Y+7,"+----------------------+");
@@ -146,7 +147,10 @@ void game_over(Game *s){ //�������� �Լ�
     Sleep(500);
         while (kbhit()) getch();
     s->key=getch();
-    title(s);
+    if(s->key == 'm') 
+        displayMenu(ulist, s);
+    else
+        title(s);
 }
  
 void food(Game *s){
