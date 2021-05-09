@@ -2,10 +2,10 @@
 
 int addScore(Users *u, int score)
 {
-  char delim;
   printf("What's your name? ");
   scanf("%[^\n]", u->userName);
-  score = u->score;
+  
+  u->score = score;
 
   printf("==> 추가됨!\n");
   return 1;
