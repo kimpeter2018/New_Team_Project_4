@@ -59,7 +59,7 @@ void displayMenu(Users *ulist, Game *s, int count){
             list(ulist, curcount);
         else if (menu == 2)
         {
-            count += createProduct(&ulist[curcount++]);
+            count += addScore(&ulist[curcount++], s->score);
         }
         else if (menu == 3)
         {
@@ -69,7 +69,7 @@ void displayMenu(Users *ulist, Game *s, int count){
                 printf("=>취소됨!");
                 continue;
             }
-            updateProduct(&ulist[no - 1]);
+            updateMenu(&ulist[no - 1]);
         }
         else if (menu == 4)
         {
@@ -84,17 +84,17 @@ void displayMenu(Users *ulist, Game *s, int count){
             scanf("%d", &deleteok);
             if (deleteok == 1)
             {
-                if (deleteProduct(&ulist[no - 1]))
+                if (deleteMenu(&ulist[no - 1]))
                     count--;
             }
         }
-        else if (menu == 5)
-        {
-            if (count == 0)
-                printf("데이터가 없습니다!\n");
-            else
-                saveDa(ulist, curcount);
-        }
+        // else if (menu == 5)
+        // {
+        //     if (count == 0)
+        //         printf("데이터가 없습니다!\n");
+        //     else
+        //         saveDa(ulist, curcount);
+        // }
         else if (menu == 7)
         {
             title(s);
