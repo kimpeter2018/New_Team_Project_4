@@ -13,7 +13,7 @@ typedef struct {
 
 
 int addScore(Users *u, int score);
-void readScoreBoard(Users u);
+int updateMenu(Users *u);
 void readScoreBoard(Users u);
 int deleteMenu(Users *u);
 

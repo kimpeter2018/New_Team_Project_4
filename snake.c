@@ -1,5 +1,3 @@
-#include"user.h"
-#include"game.h"
 #include"manager.h"
 
 
@@ -14,8 +12,6 @@ int main(){
     title(s);
     
     Users ulist[100];
-    int curcount = 0;
-    int count = 0, menu;
 
     while(1){
         if(kbhit()) do{s->key=getch();} while(s->key==224); //Ű �Է¹���

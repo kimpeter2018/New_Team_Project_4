@@ -6,7 +6,7 @@ void list(Users *u, int count){
     for(int i = 0; i < count; i ++){
     if(u[i].score == -1) continue;
     printf("%2d ", i+1);
-    readDa(&u[i]);
+    readScoreBoard(u[i]);
     }
 }
 
