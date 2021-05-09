@@ -1,4 +1,4 @@
-#include "manager.h"
+#include "game.h"
 
 void list(Users *u, int count){
     printf("\nName            score\n");

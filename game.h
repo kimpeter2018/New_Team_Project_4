@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-#include "user.h"
+#include "manager.h"
 
 #define LEFT 75
 #define RIGHT 77
