@@ -1,5 +1,10 @@
-#include"game.h"
-#include"user.h"
+#include "game.h"
+
+void gotoxy(int x,int y,char* s) { //x���� 2x�� ����, ��ǥ���� �ٷ� ���ڿ��� �Է��� �� �ֵ��� printf�Լ� ����  
+    COORD pos={2*x,y};
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
+    printf("%s",s);
+}
 
 void title(Game *s){
     int i,j;

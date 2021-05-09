@@ -5,6 +5,7 @@ int addScore(Users *u, int score)
   char delim;
   printf("What's your name? ");
   scanf("%[^\n]", u->userName);
+  delim = getchar();
   score = u->score;
 
   printf("==> 추가됨!\n");
