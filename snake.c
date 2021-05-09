@@ -2,7 +2,7 @@
 #include"user.h"
 #include"manager.h"
 
-void gotoxy(int x,int y,char* s) { //x°ªÀ» 2x·Î º¯°æ, ÁÂÇ¥°ª¿¡ ¹Ù·Î ¹®ÀÚ¿­À» ÀÔ·ÂÇÒ ¼ö ÀÖµµ·Ï printfÇÔ¼ö »ğÀÔ  
+void gotoxy(int x,int y,char* s) { //xï¿½ï¿½ï¿½ï¿½ 2xï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ printfï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½  
     COORD pos={2*x,y};
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
     printf("%s",s);
@@ -18,33 +18,33 @@ int main(){
     int count = 0, menu;
 
     while(1){
-        if(kbhit()) do{s->key=getch();} while(s->key==224); //Å° ÀÔ·Â¹ŞÀ½
+        if(kbhit()) do{s->key=getch();} while(s->key==224); //Å° ï¿½Ô·Â¹ï¿½ï¿½ï¿½
         Sleep(s->speed);
         
-        switch(s->key){ //ÀÔ·Â¹ŞÀº Å°¸¦ ÆÄ¾ÇÇÏ°í ½ÇÇà  
+        switch(s->key){ //ï¿½Ô·Â¹ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ ï¿½Ä¾ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½  
             case LEFT:
             case RIGHT:
             case UP:
             case DOWN:
                 if((s->dir==LEFT&&s->key!=RIGHT)||(s->dir==RIGHT&&s->key!=LEFT)||(s->dir==UP&&s->key!=DOWN)||
-(s->dir==DOWN&&s->key!=UP))//180È¸ÀüÀÌµ¿À» ¹æÁöÇÏ±â À§ÇØ ÇÊ¿ä. 
+(s->dir==DOWN&&s->key!=UP))//180È¸ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½. 
                     s->dir=s->key;
-                s->key=0; // Å°°ªÀ» ÀúÀåÇÏ´Â ÇÔ¼ö¸¦ reset 
+                s->key=0; // Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ reset 
             break;
-            case PAUSE: // PÅ°¸¦ ´©¸£¸é ÀÏ½ÃÁ¤Áö 
+            case PAUSE: // PÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ 
                 pause(s);
             break;
-            case 115: //SÅ°¸¦ ´©¸£¸é °³¹ßÀÚ¿ë status¸¦ È°¼ºÈ­ ½ÃÅ´  
+            case 115: //SÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ statusï¿½ï¿½ È°ï¿½ï¿½È­ ï¿½ï¿½Å´  
                 if(s->status_on==0) s->status_on=1;
                 else s->status_on=0;
                 s->key=0;
                 break;
-            case ESC: //ESCÅ°¸¦ ´©¸£¸é ÇÁ·Î±×·¥ Á¾·á 
+            case ESC: //ESCÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½ 
                 exit(0);
         }
-        move(s, s->dir); 
+        move(s, s->dir, ulist); 
         
-        if(s->status_on==1) status(s); // statusÇ¥½Ã 
+        if(s->status_on==1) status(s); // statusÇ¥ï¿½ï¿½ 
     }
         
 }
