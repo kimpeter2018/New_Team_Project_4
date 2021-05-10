@@ -2,16 +2,17 @@
 
 int addScore(Game *s)
 {
+  getchar();
   printf("What's your name? ");
   scanf("%[^\n]", s->userName);
 
-  printf("==> Ãß°¡µÊ!\n");
+  printf("==> ï¿½ß°ï¿½ï¿½ï¿½!\n");
   return 1;
 }
 
 void readScoreBoard(Game s)
 {
-  printf("%s %dÁ¡", s.userName, s.score);
+  printf("%s %dï¿½ï¿½", s.userName, s.score);
 }
 
 int updateScoreBoard(Game *s)
@@ -20,13 +21,13 @@ int updateScoreBoard(Game *s)
   getchar();
   scanf("%[^\n]", s->userName);
 
-  printf("==> ¼öÁ¤µÊ!\n");
+  printf("==> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!\n");
   return 1;
 }
 
 int deleteMenu(Game *s)
 {
   s->score = -1;
-  printf("==> »èÁ¦µÊ!\n");
+  printf("==> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!\n");
   return 0;
 }
