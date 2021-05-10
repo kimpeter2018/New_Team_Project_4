@@ -8,6 +8,7 @@ void pause(Game *s); //일시정지
 void game_over(Game *s); //게임 오버를 확인 
 void food(Game *s); // 음식 생성 
 void status(Game *s); // 개발자용 status표시
+void ClearScreen();
 //////////////////////////////////////////////////////////////////////
 void list(Game *s, int count);
 int dataNo(Game *s, int count);

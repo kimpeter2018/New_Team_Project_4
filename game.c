@@ -8,6 +8,11 @@ void gotoxy(int x, int y, char *s)
     printf("%s", s);
 }
 
+void ClearScreen()
+{
+	system("cls");
+}
+
 void title(Game *s)
 {
     int i, j;
@@ -167,15 +172,20 @@ void pause(Game *s)
 
 void list(Game *s, int count)
 {
-    printf("\nName            score\n");
-    printf("-----------------------------------\n");
+    ClearScreen();
+    draw_map(s);
+    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5, "+--------------------------+");
+    
     for (int i = 0; i < count; i++)
     {
         if (s[i].score == -1)
             continue;
+        gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6, " ");
         printf("%2d ", i + 1);
         readScoreBoard(s[i]);
     }
+
+    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7, "+--------------------------+");
 }
 
 int dataNo(Game *s, int count)
@@ -253,6 +263,8 @@ void game_over(Game *s)
         gotoxy(MAP_X + (MAP_WIDTH / 2) - 4, MAP_Y + 10, "☆ BEST SCORE ☆");
     }
 
+    ClearScreen();
+    draw_map(s);
     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 12, "+--------------------------+");
     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 13, "|  랭킹을 추가하시겠습니까?  |");
     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 14, "+--------------------------+");
@@ -278,14 +290,18 @@ void game_over(Game *s)
             if (menu == 1)
             {
                 title(s);
+                break;
             }
 
             else if (menu == 2)
             {
-                if (count > 0)
+                if (count > 0){
                     list(s, index);
+                }
                 else
                 {
+                    ClearScreen();
+                    draw_map(s);
                     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5, "+--------------------------+");
                     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6, "|    =>데이터가 없습니다.   |");
                     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7, "+--------------------------+");
@@ -297,6 +313,8 @@ void game_over(Game *s)
                 no = dataNo(s, index);
                 if (no == 0)
                 {
+                    ClearScreen();
+                    draw_map(s);
                     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5, "+--------------------------+");
                     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6, "|        => 취소됨!        |");
                     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7, "+--------------------------+");
@@ -310,12 +328,16 @@ void game_over(Game *s)
                 no = dataNo(s, index);
                 if (no == 0)
                 {
+                    ClearScreen();
+                    draw_map(s);
                     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5, "+--------------------------+");
                     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6, "|        => 취소됨!        |");
                     gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7, "+--------------------------+");
                     continue;
                 }
                 int deleteok;
+                ClearScreen();
+                draw_map(s);
                 gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5, "+--------------------------+");
                 gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6, "|  삭제하시겠습니까?(삭제:1) |");
                 gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7, "+--------------------------+");
@@ -326,6 +348,20 @@ void game_over(Game *s)
                     if (deleteMenu(&s[no - 1]))
                         count--;
                 }
+            }
+
+            ClearScreen();
+            draw_map(s);
+            gotoxy(MAP_X + (MAP_WIDTH / 2) - 6, MAP_Y + 5, "+----------------------+");
+            gotoxy(MAP_X + (MAP_WIDTH / 2) - 6, MAP_Y + 6, "|      GAME OVER..     |");
+            gotoxy(MAP_X + (MAP_WIDTH / 2) - 6, MAP_Y + 7, "+----------------------+");
+            gotoxy(MAP_X + (MAP_WIDTH / 2) - 6, MAP_Y + 8, " YOUR SCORE : ");
+            printf("%d", s->last_score = s->score);
+
+            if (s->score > s->best_score)
+            {
+                s->best_score = s->score;
+                gotoxy(MAP_X + (MAP_WIDTH / 2) - 4, MAP_Y + 10, "☆ BEST SCORE ☆");
             }
         }
     }
