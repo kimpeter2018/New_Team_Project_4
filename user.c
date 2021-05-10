@@ -10,7 +10,7 @@ int addScore(Game *s)
 
   gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6, "<==> Added!>");
   gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7, "<  PRESS ENTER  >");
->>>>>>> main
+
   return 1;
 }
 
@@ -25,10 +25,8 @@ int updateScoreBoard(Game *s)
   getchar();
   scanf("%[^\n]", s->userName);
 
-
   printf("==> YOUR NAME IS UPDATED!\n");
   return 1;
-}
 
 int deleteMenu(Game *s)
 {
