@@ -1,4 +1,4 @@
-#include "game.h"
+#include "manager.h"
 
 void list(Users *u, int count){
     printf("\nName            score\n");
@@ -6,14 +6,14 @@ void list(Users *u, int count){
     for(int i = 0; i < count; i ++){
     if(u[i].score == -1) continue;
     printf("%2d ", i+1);
-    readScoreBoard(u[i]);
+    readDa(&u[i]);
     }
 }
 
 int dataNo(Users *u, int count){
     int no;
     list(u, count);
-    printf("π¯»£¥¬? (√Îº“: 0)? ");
+    printf("Î≤àÌò∏Îäî (ÏµúÏÜå: 0)? ");
     scanf("%d", &no);
     
     return no;
@@ -21,83 +21,17 @@ int dataNo(Users *u, int count){
 
 int selectMenu(){
     int menu;
-    printf("\n*** Score Board ***\n");
-    printf("1. ¡∂»∏\n");
-    printf("2. √ﬂ∞°\n");
-    printf("3. ºˆ¡§\n");
-    printf("4. ªË¡¶\n");
-    printf("5. ∆ƒ¿œ¿˙¿Â\n");
-    printf("6. ∞Àªˆ\n");
-    printf("7. ∞‘¿”¿∏∑Œ µπæ∆∞°±‚");
-    printf("0. ¡æ∑·\n\n");
-    printf("=> ø¯«œ¥¬ ∏ﬁ¥∫¥¬? ");
+    printf("\n*** Ï¶êÍ±∞Ïö¥ ÏáºÌïë ***\n");
+    printf("1. Ï°∞Ìöå\n");
+    printf("2. Ï∂îÍ∞Ä\n");
+    printf("3. ÏàòÏ†ï\n");
+    printf("4. ÏÇ≠Ï†ú\n");
+    printf("5. ÌååÏùºÏ†ÄÏû•\n");
+    printf("6. Í≤ÄÏÉâ\n");
+    printf("0. Ï¢ÖÎ£å\n\n");
+    printf("=> ÏõêÌïòÎäî Î©îÎâ¥Îäî? ");
     scanf("%d", &menu);
     printf("****************\n");
 
     return menu;
-}
-
-void displayMenu(Users *ulist, Game *s, int count){
-    int menu;
-    int curcount = count;
-    while (1)
-    {
-        menu = selectMenu();
-        getchar();
-        if (menu == 0)
-            break;
-        if (menu == 1 || menu == 3 || menu == 4)
-        {
-            if (count == 0)
-            {
-                printf(" µ•¿Ã≈Õ∞° æ¯Ω¿¥œ¥Ÿ!\n");
-                continue;
-            }
-        }
-
-        if (menu == 1)
-            list(ulist, curcount);
-        else if (menu == 2)
-        {
-            count += addScore(&ulist[curcount++], s->score);
-        }
-        else if (menu == 3)
-        {
-            int no = dataNo(ulist, curcount);
-            if (no == 0)
-            {
-                printf("=>√Îº“µ !");
-                continue;
-            }
-            updateMenu(&ulist[no - 1]);
-        }
-        else if (menu == 4)
-        {
-            int no = dataNo(ulist, curcount);
-            if (no == 0)
-            {
-                printf("=>√Îº“µ !");
-                continue;
-            }
-            int deleteok;
-            printf("¡§∏ª∑Œ ªË¡¶«œΩ√∞⁄Ω¿¥œ±Ó?(ªË¡¶:1)");
-            scanf("%d", &deleteok);
-            if (deleteok == 1)
-            {
-                if (deleteMenu(&ulist[no - 1]))
-                    count--;
-            }
-        }
-        // else if (menu == 5)
-        // {
-        //     if (count == 0)
-        //         printf("µ•¿Ã≈Õ∞° æ¯Ω¿¥œ¥Ÿ!\n");
-        //     else
-        //         saveDa(ulist, curcount);
-        // }
-        else if (menu == 7)
-        {
-            title(s);
-        }
-    }
 }
