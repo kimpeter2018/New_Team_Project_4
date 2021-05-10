@@ -3,38 +3,96 @@
 
 ////////////////////////////MAIN START//////////////////////////////
 int main(){
-    Game s[100];
-    title(s);
-    
+    Game slist[100];
+    int index = 0;
+    int count = 0;
+    int menu, no;
+
+    count = loadData(slist);
+    index = count;
+
     while(1){
-        if(kbhit()) do{s->key=getch();} while(s->key==224); //키 입력받음
-        Sleep(s->speed);
-        
-        switch(s->key){ //입력받은 키를 파악하고 실행  
-            case LEFT:
-            case RIGHT:
-            case UP:
-            case DOWN:
-                if((s->dir==LEFT&&s->key!=RIGHT)||(s->dir==RIGHT&&s->key!=LEFT)||(s->dir==UP&&s->key!=DOWN)||
-                (s->dir==DOWN&&s->key!=UP))//180회전이동을 방지하기 위해 필요. 
-                    s->dir=s->key;
-                s->key=0; // 키값을 저장하는 함수를 reset 
-            break;
-            case PAUSE: // P키를 누르면 일시정지 
-                pause(s);
-            break;
-            case 115: //S키를 누르면 개발자용 status를 활성화 시킴  
-                if(s->status_on==0) s->status_on=1;
-                else s->status_on=0;
-                s->key=0;
+        ClearScreen();
+        selectMenu ();
+        scanf("%d", &menu);
+
+        switch(menu)
+		{
+			case 1:
+				startGame(slist);
+				break;
+			case 2:
+				ClearScreen();
+				if (count > 0){
+                    list(slist, index);
+                    break;
+                }
+                else
+                {
+                    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5);
+                    printf("+--------------------------+");
+                    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6);
+                    printf("|    =>데이터가 없습니다.   |");
+                    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7);
+                    printf("+--------------------------+");
+                    break;
+                }
+            case 3:
+                count += addScore(&slist[index++]);
                 break;
-            case ESC: //ESC키를 누르면 프로그램 종료 
-                exit(0);
-        }
-        move(s, s->dir);
-        
-        if(s->status_on==1) status(s); // status표시   
+			case 4: 
+				no = dataNo(slist, index);
+                if (no == 0)
+                {
+                    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5);
+                    printf("+--------------------------+");
+                    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6);
+                    printf("|        => 취소됨!        |");
+                    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7);
+                    printf("+--------------------------+");
+                    continue;
+                }
+                updateScoreBoard(&slist[no - 1]);
+				break;
+            case 5:
+                no = dataNo(slist, index);
+                ClearScreen();
+                draw_map(slist);
+                if (no == 0)
+                {
+                    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5);
+                    printf("+--------------------------+");
+                    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6);
+                    printf("|        => 취소됨!        |");
+                    gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7);
+                    printf("+--------------------------+");
+                    continue;
+                }
+                int deleteok;
+                gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5);
+                printf("+--------------------------+");
+                gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6);
+                printf("| 삭제하시겠습니까?(삭제:1)|");
+                gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7);
+                printf("+--------------------------+");
+                gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 9);
+                printf("<  PRESS 1 : YES / 0 : NO  >");
+                scanf("%d", &deleteok);
+
+                if (deleteok == 1)
+                {
+                    if (deleteMenu(&slist[no - 1]))
+                        count--;
+                }
+                break;
+			case 0:
+				printf("게임을 종료합니다...\n");
+				return 0;
+			default:
+				break;	
+		} 
     }
-}
     
+    return 0;
+}
 ///////////////////////////MAIN END////////////////////////////////
