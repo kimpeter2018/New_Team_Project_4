@@ -4,6 +4,8 @@
 int addScore(Game *s)
 {
   getchar();
+
+
   ClearScreen();
   draw_map(s);
   gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5);
@@ -16,6 +18,7 @@ int addScore(Game *s)
   gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 8);
   printf("<  PRESS ENTER  > ");
   getch();
+
 
   return 1;
 }
