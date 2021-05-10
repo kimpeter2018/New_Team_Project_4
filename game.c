@@ -64,8 +64,8 @@ void reset(Game *s){
     food(s); // food 생성  
 }
  
-void draw_map(Game *s){ //맵 테두리 그리는 함수 
-    int i,j;
+void draw_map(){ //맵 테두리 그리는 함수 
+    int i;
     for(i=0;i<MAP_WIDTH;i++){
         gotoxy(MAP_X+i,MAP_Y,"■");
     }
@@ -137,6 +137,55 @@ void pause(Game *s){ // p키를 눌렀을 경우 게임을 일시 정지
 }
  
 void game_over(Game *s){ //게임종료 함수 
+    int index = 0;
+    int count = 0;
+    int menu, no;
+
+    count = loadData(s);
+    index = count;
+
+    while(1){
+        menu = selectMenu();
+
+        if(menu == 0) break;
+
+        if(menu == 1){
+            if(count>0)
+                list(s, index);
+            else
+                printf("데이터가 없습니다.\n");
+        }
+
+        else if(menu == 2){ 
+            count += add(&s[index++]);
+        }
+
+        else if(menu == 3){
+            no = dataNo(s, index);
+            if(no == 0){
+                printf("=> 취소됨!\n");
+                continue;
+            }
+            update(&s[no-1]);
+        }
+
+        else if(menu == 4){
+            no = dataNo(s, index);
+            if(no == 0){
+                printf("=> 취소됨!\n");
+                continue;
+            }
+            int deleteok;
+            printf("정말로 삭제하시겠습니까?(삭제:1)");
+            scanf("%d", &deleteok);
+            
+            if(deleteok == 1){
+                if(deleteDa(&s[no-1])) 
+                count--;
+            }
+        }
+    }
+
     gotoxy(MAP_X+(MAP_WIDTH/2)-6,MAP_Y+5,"+----------------------+");
     gotoxy(MAP_X+(MAP_WIDTH/2)-6,MAP_Y+6,"|      GAME OVER..     |");
     gotoxy(MAP_X+(MAP_WIDTH/2)-6,MAP_Y+7,"+----------------------+");
@@ -152,7 +201,6 @@ void game_over(Game *s){ //게임종료 함수
     Sleep(500);
         while (kbhit()) getch();
     s->key=getch();
-    title(s);
 }
  
 void food(Game *s){
@@ -199,4 +247,55 @@ void status(Game *s){ //각종 스텟을 볼수 있는 함수
     printf("%3d",s->speed);
     gotoxy(MAP_X+MAP_WIDTH+1,MAP_Y+6,"score= ");
     printf("%3d",s->score);  
+}
+////////////////////////////////////////////////////////////////
+void list(Game *s, int count){
+    printf("\nName            score\n");
+    printf("-----------------------------------\n");
+    for(int i = 0; i < count; i ++){
+    if(s[i].score == -1) continue;
+    printf("%2d ", i+1);
+    readScoreBoard(s[i]);
+    }
+}
+
+int dataNo(Game *s, int count){
+    int no;
+    list(s, count);
+    printf("번호는 (최소: 0)? ");
+    scanf("%d", &no);
+    
+    return no;
+}
+
+int selectMenu(){
+    int i, j, menu;
+    
+    while (kbhit()) getch(); //버퍼에 있는 키값을 버림 
+
+    draw_map();    //맵 테두리를 그림 
+    for(i=MAP_Y+1;i<MAP_Y+MAP_HEIGHT-1;i++){ // 맵 테두리 안쪽을 빈칸으로 채움 
+        for(j=MAP_X+1;j<MAP_X+MAP_WIDTH-1;j++) gotoxy(j,i,"  ");
+    }
+
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+5,"+--------------------------+");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+6,"|        1. 게임 시작       |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+7,"|        2. 랭킹 조회       |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+8,"|        3. 랭킹 삭제       |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+9,"|        4. 랭킹 수정       |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+10,"|        5. 게임 종료       |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+11,"+--------------------------+");
+
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+13," <  SELECT OPTION TO START  > ");
+    scanf("%d", &menu);
+    
+    while(1){
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+13," <  SELECT OPTION TO START  > ");
+        Sleep(400);
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+13,"                              ");
+        Sleep(400);
+        
+    }
+
+    return menu;
 }

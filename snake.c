@@ -1,16 +1,11 @@
 #include"game.h"
 #include"user.h"
-#include"manager.h"
 
 ////////////////////////////MAIN START//////////////////////////////
 int main(){
     Game s[100];
     title(s);
     
-    Users ulist[100];
-    int curcount = 0;
-    int count = 0, menu;
-
     while(1){
         if(kbhit()) do{s->key=getch();} while(s->key==224); //키 입력받음
         Sleep(s->speed);
@@ -21,7 +16,7 @@ int main(){
             case UP:
             case DOWN:
                 if((s->dir==LEFT&&s->key!=RIGHT)||(s->dir==RIGHT&&s->key!=LEFT)||(s->dir==UP&&s->key!=DOWN)||
-(s->dir==DOWN&&s->key!=UP))//180회전이동을 방지하기 위해 필요. 
+                (s->dir==DOWN&&s->key!=UP))//180회전이동을 방지하기 위해 필요. 
                     s->dir=s->key;
                 s->key=0; // 키값을 저장하는 함수를 reset 
             break;
@@ -36,11 +31,10 @@ int main(){
             case ESC: //ESC키를 누르면 프로그램 종료 
                 exit(0);
         }
-        move(s, s->dir); 
+        move(s, s->dir);
         
-        if(s->status_on==1) status(s); // status표시 
+        if(s->status_on==1) status(s); // status표시   
     }
-        
 }
     
 ///////////////////////////MAIN END////////////////////////////////

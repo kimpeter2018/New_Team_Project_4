@@ -1,19 +1,18 @@
 #include "user.h"
 
-int addScore(Users *u, int score)
+int addScore(Users *u, Game *s, int score)
 {
-  char delim;
   printf("What's your name? ");
   scanf("%[^\n]", u->userName);
-  score = u->score;
+  score = s->score;
 
   printf("==> 추가됨!\n");
   return 1;
 }
 
-void readScoreBoard(Users u)
+void readScoreBoard(Users u, Game s)
 {
-  printf("%s %d점", u.userName, u.score);
+  printf("%s %d점", u.userName, s.score);
 }
 
 int updateMenu(Users *u)
