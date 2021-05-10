@@ -7,6 +7,7 @@ int addScore(Game *s)
   scanf("%[^\n]", s->userName);
 
   printf("==> ADDED SUCCESSFULLY!\n");
+  printf("<  PRESS ENTER  >");
   return 1;
 }
 
