@@ -1,40 +1,44 @@
 #include"game.h"
+#include"user.h"
+#include"manager.h"
 
-
+////////////////////////////MAIN START//////////////////////////////
 int main(){
     Game s[100];
     title(s);
     
     Users ulist[100];
+    int curcount = 0;
+    int count = 0, menu;
 
     while(1){
-        if(kbhit()) do{s->key=getch();} while(s->key==224); //Å° ï¿½Ô·Â¹ï¿½ï¿½ï¿½
+        if(kbhit()) do{s->key=getch();} while(s->key==224); //Å° ÀÔ·Â¹ŞÀ½
         Sleep(s->speed);
         
-        switch(s->key){ //ï¿½Ô·Â¹ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ ï¿½Ä¾ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½  
+        switch(s->key){ //ÀÔ·Â¹ŞÀº Å°¸¦ ÆÄ¾ÇÇÏ°í ½ÇÇà  
             case LEFT:
             case RIGHT:
             case UP:
             case DOWN:
                 if((s->dir==LEFT&&s->key!=RIGHT)||(s->dir==RIGHT&&s->key!=LEFT)||(s->dir==UP&&s->key!=DOWN)||
-(s->dir==DOWN&&s->key!=UP))//180È¸ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½. 
+(s->dir==DOWN&&s->key!=UP))//180È¸ÀüÀÌµ¿À» ¹æÁöÇÏ±â À§ÇØ ÇÊ¿ä. 
                     s->dir=s->key;
-                s->key=0; // Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ reset 
+                s->key=0; // Å°°ªÀ» ÀúÀåÇÏ´Â ÇÔ¼ö¸¦ reset 
             break;
-            case PAUSE: // PÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+            case PAUSE: // PÅ°¸¦ ´©¸£¸é ÀÏ½ÃÁ¤Áö 
                 pause(s);
             break;
-            case 115: //SÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ statusï¿½ï¿½ È°ï¿½ï¿½È­ ï¿½ï¿½Å´  
+            case 115: //SÅ°¸¦ ´©¸£¸é °³¹ßÀÚ¿ë status¸¦ È°¼ºÈ­ ½ÃÅ´  
                 if(s->status_on==0) s->status_on=1;
                 else s->status_on=0;
                 s->key=0;
                 break;
-            case ESC: //ESCÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+            case ESC: //ESCÅ°¸¦ ´©¸£¸é ÇÁ·Î±×·¥ Á¾·á 
                 exit(0);
         }
-        move(s, s->dir, ulist); 
+        move(s, s->dir); 
         
-        if(s->status_on==1) status(s); // statusÇ¥ï¿½ï¿½ 
+        if(s->status_on==1) status(s); // statusÇ¥½Ã 
     }
         
 }
