@@ -7,33 +7,33 @@ int main(){
     title(s);
     
     while(1){
-        if(kbhit()) do{s->key=getch();} while(s->key==224); //í‚¤ ì…ë ¥ë°›ìŒ
+        if(kbhit()) do{s->key=getch();} while(s->key==224); //Å° ÀÔ·Â¹ŞÀ½
         Sleep(s->speed);
         
-        switch(s->key){ //ì…ë ¥ë°›ì€ í‚¤ë¥¼ íŒŒì•…í•˜ê³  ì‹¤í–‰  
+        switch(s->key){ //ÀÔ·Â¹ŞÀº Å°¸¦ ÆÄ¾ÇÇÏ°í ½ÇÇà  
             case LEFT:
             case RIGHT:
             case UP:
             case DOWN:
                 if((s->dir==LEFT&&s->key!=RIGHT)||(s->dir==RIGHT&&s->key!=LEFT)||(s->dir==UP&&s->key!=DOWN)||
-                (s->dir==DOWN&&s->key!=UP))//180íšŒì „ì´ë™ì„ ë°©ì§€í•˜ê¸° ìœ„í•´ í•„ìš”. 
+                (s->dir==DOWN&&s->key!=UP))//180È¸ÀüÀÌµ¿À» ¹æÁöÇÏ±â À§ÇØ ÇÊ¿ä. 
                     s->dir=s->key;
-                s->key=0; // í‚¤ê°’ì„ ì €ì¥í•˜ëŠ” í•¨ìˆ˜ë¥¼ reset 
+                s->key=0; // Å°°ªÀ» ÀúÀåÇÏ´Â ÇÔ¼ö¸¦ reset 
             break;
-            case PAUSE: // Pí‚¤ë¥¼ ëˆ„ë¥´ë©´ ì¼ì‹œì •ì§€ 
+            case PAUSE: // PÅ°¸¦ ´©¸£¸é ÀÏ½ÃÁ¤Áö 
                 pause(s);
             break;
-            case 115: //Sí‚¤ë¥¼ ëˆ„ë¥´ë©´ ê°œë°œììš© statusë¥¼ í™œì„±í™” ì‹œí‚´  
+            case 115: //SÅ°¸¦ ´©¸£¸é °³¹ßÀÚ¿ë status¸¦ È°¼ºÈ­ ½ÃÅ´  
                 if(s->status_on==0) s->status_on=1;
                 else s->status_on=0;
                 s->key=0;
                 break;
-            case ESC: //ESCí‚¤ë¥¼ ëˆ„ë¥´ë©´ í”„ë¡œê·¸ë¨ ì¢…ë£Œ 
+            case ESC: //ESCÅ°¸¦ ´©¸£¸é ÇÁ·Î±×·¥ Á¾·á 
                 exit(0);
         }
         move(s, s->dir);
         
-        if(s->status_on==1) status(s); // statusí‘œì‹œ   
+        if(s->status_on==1) status(s); // statusÇ¥½Ã   
     }
 }
     

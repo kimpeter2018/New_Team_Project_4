@@ -22,8 +22,6 @@
 
 typedef struct{
         char userName[20];
-        int score;
-
     int x[100], y[100]; //x,y 좌표값을 저장 총 100개 
     int food_x, food_y; //food의 좌표값을 저장 
     int length; //몸길이를 기억 
@@ -36,7 +34,7 @@ typedef struct{
     int status_on; // 개발자용 status 표시활성화 변수.. 게임중에 S키를 누르면 활성 
 } Game;
 
-int addScore(Game *s, int score);
+int addScore(Game *s);
 void readScoreBoard(Game s);
 int updateScoreBoard(Game *u);
 int deleteMenu(Game *u);

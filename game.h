@@ -11,4 +11,6 @@ void status(Game *s); // 개발자용 status표시
 //////////////////////////////////////////////////////////////////////
 void list(Game *s, int count);
 int dataNo(Game *s, int count);
+void SaveDa(Game *s, int count);
+int loadData(Game *s);
 int selectMenu();

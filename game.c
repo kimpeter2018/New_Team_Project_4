@@ -1,7 +1,7 @@
 #include"game.h"
 #include"user.h"
 
-void gotoxy(int x,int y,char* s) { //xê°’ì„ 2xë¡œ ë³€ê²½, ì¢Œí‘œê°’ì— ë°”ë¡œ ë¬¸ìì—´ì„ ì…ë ¥í•  ìˆ˜ ìˆë„ë¡ printfí•¨ìˆ˜ ì‚½ì…  
+void gotoxy(int x,int y,char* s) { //x°ªÀ» 2x·Î º¯°æ, ÁÂÇ¥°ª¿¡ ¹Ù·Î ¹®ÀÚ¿­À» ÀÔ·ÂÇÒ ¼ö ÀÖµµ·Ï printfÇÔ¼ö »ğÀÔ  
     COORD pos={2*x,y};
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
     printf("%s",s);
@@ -10,10 +10,10 @@ void gotoxy(int x,int y,char* s) { //xê°’ì„ 2xë¡œ ë³€ê²½, ì¢Œí‘œê°’ì— ë°”ë¡œ ë
 void title(Game *s){
     int i,j;
     
-    while (kbhit()) getch(); //ë²„í¼ì— ìˆëŠ” í‚¤ê°’ì„ ë²„ë¦¼ 
+    while (kbhit()) getch(); //¹öÆÛ¿¡ ÀÖ´Â Å°°ªÀ» ¹ö¸² 
 
-    draw_map(s);    //ë§µ í…Œë‘ë¦¬ë¥¼ ê·¸ë¦¼ 
-    for(i=MAP_Y+1;i<MAP_Y+MAP_HEIGHT-1;i++){ // ë§µ í…Œë‘ë¦¬ ì•ˆìª½ì„ ë¹ˆì¹¸ìœ¼ë¡œ ì±„ì›€ 
+    draw_map(s);    //¸Ê Å×µÎ¸®¸¦ ±×¸² 
+    for(i=MAP_Y+1;i<MAP_Y+MAP_HEIGHT-1;i++){ // ¸Ê Å×µÎ¸® ¾ÈÂÊÀ» ºóÄ­À¸·Î Ã¤¿ò 
         for(j=MAP_X+1;j<MAP_X+MAP_WIDTH-1;j++) gotoxy(j,i,"  ");
     }
 
@@ -23,18 +23,18 @@ void title(Game *s){
 
     gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+9," < PRESS ANY KEY TO START > ");
 
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+11,"   â—‡ â†,â†’,â†‘,â†“ : Move    ");
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+12,"   â—‡ P : Pause             ");    
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+13,"   â—‡ ESC : Quit              ");    
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+11,"   ¡Ş ¡ç,¡æ,¡è,¡é : Move    ");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+12,"   ¡Ş P : Pause             ");    
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+13,"   ¡Ş ESC : Quit              ");    
 
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+16,"  21800729 ìµœì„±ì°¬");
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+17,"  21800199 ê¹€í˜„ë¯¼");   
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+16,"  21800729 ÃÖ¼ºÂù");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+17,"  21800199 ±èÇö¹Î");   
     
     while(1){
-        if(kbhit()){ //í‚¤ì…ë ¥ë°›ìŒ 
+        if(kbhit()){ //Å°ÀÔ·Â¹ŞÀ½ 
             s->key=getch();
-            if(s->key==ESC) exit(0); // ESCí‚¤ë©´ ì¢…ë£Œ 
-            else break; //ì•„ë‹ˆë©´ ê·¸ëƒ¥ ê³„ì† ì§„í–‰ 
+            if(s->key==ESC) exit(0); // ESCÅ°¸é Á¾·á 
+            else break; //¾Æ´Ï¸é ±×³É °è¼Ó ÁøÇà 
         } 
         gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+9," < PRESS ANY KEY TO START > ");
         Sleep(400);
@@ -42,78 +42,78 @@ void title(Game *s){
         Sleep(400);
         
     }
-    reset(s); // ê²Œì„ì„ ì´ˆê¸°í™”  
+    reset(s); // °ÔÀÓÀ» ÃÊ±âÈ­  
 }
  
 void reset(Game *s){
     int i;
-    system("cls"); //í™”ë©´ì„ ì§€ì›€ 
-    draw_map(s); //ë§µ í…Œë‘ë¦¬ë¥¼ ê·¸ë¦¼ 
-    while (kbhit()) getch(); //ë²„í¼ì— ìˆëŠ” í‚¤ê°’ì„ ë²„ë¦¼ 
+    system("cls"); //È­¸éÀ» Áö¿ò 
+    draw_map(s); //¸Ê Å×µÎ¸®¸¦ ±×¸² 
+    while (kbhit()) getch(); //¹öÆÛ¿¡ ÀÖ´Â Å°°ªÀ» ¹ö¸² 
     
-    s->dir=LEFT; // ë°©í–¥ ì´ˆê¸°í™”  
-    s->speed=100; // ì†ë„ ì´ˆê¸°í™” 
-    s->length=5; //ë±€ ê¸¸ì´ ì´ˆê¸°í™” 
-    s->score=0; //ì ìˆ˜ ì´ˆê¸°í™” 
-    for(i=0;i<s->length;i++){ //ë±€ ëª¸í†µê°’ ì…ë ¥ 
+    s->dir=LEFT; // ¹æÇâ ÃÊ±âÈ­  
+    s->speed=100; // ¼Óµµ ÃÊ±âÈ­ 
+    s->length=5; //¹ì ±æÀÌ ÃÊ±âÈ­ 
+    s->score=0; //Á¡¼ö ÃÊ±âÈ­ 
+    for(i=0;i<s->length;i++){ //¹ì ¸öÅë°ª ÀÔ·Â 
         s->x[i]=MAP_WIDTH/2+i;
         s->y[i]=MAP_HEIGHT/2;
         gotoxy(MAP_X+s->x[i],MAP_Y+s->y[i],"S");
     }
-    gotoxy(MAP_X+s->x[0],MAP_Y+s->y[0],"O"); //ë±€ ë¨¸ë¦¬ ê·¸ë¦¼ 
-    food(s); // food ìƒì„±  
+    gotoxy(MAP_X+s->x[0],MAP_Y+s->y[0],"O"); //¹ì ¸Ó¸® ±×¸² 
+    food(s); // food »ı¼º  
 }
  
-void draw_map(){ //ë§µ í…Œë‘ë¦¬ ê·¸ë¦¬ëŠ” í•¨ìˆ˜ 
+void draw_map(){ //¸Ê Å×µÎ¸® ±×¸®´Â ÇÔ¼ö 
     int i;
     for(i=0;i<MAP_WIDTH;i++){
-        gotoxy(MAP_X+i,MAP_Y,"â– ");
+        gotoxy(MAP_X+i,MAP_Y,"¡á");
     }
     for(i=MAP_Y+1;i<MAP_Y+MAP_HEIGHT-1;i++){
-        gotoxy(MAP_X,i,"â– ");
-        gotoxy(MAP_X+MAP_WIDTH-1,i,"â– ");
+        gotoxy(MAP_X,i,"¡á");
+        gotoxy(MAP_X+MAP_WIDTH-1,i,"¡á");
     }
     for(i=0;i<MAP_WIDTH;i++){
-        gotoxy(MAP_X+i,MAP_Y+MAP_HEIGHT-1,"â– ");
+        gotoxy(MAP_X+i,MAP_Y+MAP_HEIGHT-1,"¡á");
     }
 }
  
 void move(Game *s, int dir){
     int i;
  
-    if(s->x[0]==s->food_x&&s->y[0]==s->food_y){ //foodì™€ ì¶©ëŒí–ˆì„ ê²½ìš° 
-        s->score+=10; //ì ìˆ˜ ì¦ê°€ 
-        food(s); //ìƒˆë¡œìš´ food ì¶”ê°€ 
-        s->length++; //ê¸¸ì´ì¦ê°€ 
-        s->x[s->length-1]=s->x[s->length-2]; //ìƒˆë¡œë§Œë“  ëª¸í†µì— ê°’ ì…ë ¥ 
+    if(s->x[0]==s->food_x&&s->y[0]==s->food_y){ //food¿Í Ãæµ¹ÇßÀ» °æ¿ì 
+        s->score+=10; //Á¡¼ö Áõ°¡ 
+        food(s); //»õ·Î¿î food Ãß°¡ 
+        s->length++; //±æÀÌÁõ°¡ 
+        s->x[s->length-1]=s->x[s->length-2]; //»õ·Î¸¸µç ¸öÅë¿¡ °ª ÀÔ·Â 
         s->y[s->length-1]=s->y[s->length-2];
     }
-    if(s->x[0]==0||s->x[0]==MAP_WIDTH-1||s->y[0]==0||s->y[0]==MAP_HEIGHT-1){ //ë²½ê³¼ ì¶©ëŒí–ˆì„ ê²½ìš° 
+    if(s->x[0]==0||s->x[0]==MAP_WIDTH-1||s->y[0]==0||s->y[0]==MAP_HEIGHT-1){ //º®°ú Ãæµ¹ÇßÀ» °æ¿ì 
         game_over(s);
-        return; //game_overì—ì„œ ê²Œì„ì„ ë‹¤ì‹œ ì‹œì‘í•˜ê²Œ ë˜ë©´ ì—¬ê¸°ì„œë¶€í„° ë°˜ë³µë˜ë¯€ë¡œ 
-                //returnì„ ì‚¬ìš©í•˜ì—¬ moveì˜ ë‚˜ë¨¸ì§€ ë¶€ë¶„ì´ ì‹¤í–‰ë˜ì§€ ì•Šë„ë¡ í•©ë‹ˆë‹¤. 
+        return; //game_over¿¡¼­ °ÔÀÓÀ» ´Ù½Ã ½ÃÀÛÇÏ°Ô µÇ¸é ¿©±â¼­ºÎÅÍ ¹İº¹µÇ¹Ç·Î 
+                //returnÀ» »ç¿ëÇÏ¿© moveÀÇ ³ª¸ÓÁö ºÎºĞÀÌ ½ÇÇàµÇÁö ¾Êµµ·Ï ÇÕ´Ï´Ù. 
     }
-    for(i=1;i<s->length;i++){ //ìê¸°ëª¸ê³¼ ì¶©ëŒí–ˆëŠ”ì§€ ê²€ì‚¬ 
+    for(i=1;i<s->length;i++){ //ÀÚ±â¸ö°ú Ãæµ¹Çß´ÂÁö °Ë»ç 
         if(s->x[0]==s->x[i]&&s->y[0]==s->y[i]){
             game_over(s);
             return;
         }
     }
     
-    gotoxy(MAP_X+s->x[s->length-1],MAP_Y+s->y[s->length-1],"  "); //ëª¸í†µ ë§ˆì§€ë§‰ì„ ì§€ì›€ 
-    for(i=s->length-1;i>0;i--){ //ëª¸í†µì¢Œí‘œë¥¼ í•œì¹¸ì”© ì˜®ê¹€ 
+    gotoxy(MAP_X+s->x[s->length-1],MAP_Y+s->y[s->length-1],"  "); //¸öÅë ¸¶Áö¸·À» Áö¿ò 
+    for(i=s->length-1;i>0;i--){ //¸öÅëÁÂÇ¥¸¦ ÇÑÄ­¾¿ ¿Å±è 
         s->x[i]=s->x[i-1];
         s->y[i]=s->y[i-1];
     }
-    gotoxy(MAP_X+s->x[0],MAP_Y+s->y[0],"S"); //ë¨¸ë¦¬ê°€ ìˆë˜ê³³ì„ ëª¸í†µìœ¼ë¡œ ê³ ì¹¨ 
-    if(dir==LEFT) --s->x[0]; //ë°©í–¥ì— ë”°ë¼ ìƒˆë¡œìš´ ë¨¸ë¦¬ì¢Œí‘œ(x[0],y[0])ê°’ì„ ë³€ê²½ 
+    gotoxy(MAP_X+s->x[0],MAP_Y+s->y[0],"S"); //¸Ó¸®°¡ ÀÖ´ø°÷À» ¸öÅëÀ¸·Î °íÄ§ 
+    if(dir==LEFT) --s->x[0]; //¹æÇâ¿¡ µû¶ó »õ·Î¿î ¸Ó¸®ÁÂÇ¥(x[0],y[0])°ªÀ» º¯°æ 
     if(dir==RIGHT) ++s->x[0];
     if(dir==UP) --s->y[0]; 
     if(dir==DOWN) ++s->y[0];     
-    gotoxy(MAP_X+s->x[i],MAP_Y+s->y[i],"O"); //ìƒˆë¡œìš´ ë¨¸ë¦¬ì¢Œí‘œê°’ì— ë¨¸ë¦¬ë¥¼ ê·¸ë¦¼ 
+    gotoxy(MAP_X+s->x[i],MAP_Y+s->y[i],"O"); //»õ·Î¿î ¸Ó¸®ÁÂÇ¥°ª¿¡ ¸Ó¸®¸¦ ±×¸² 
 }
  
-void pause(Game *s){ // pí‚¤ë¥¼ ëˆŒë €ì„ ê²½ìš° ê²Œì„ì„ ì¼ì‹œ ì •ì§€ 
+void pause(Game *s){ // pÅ°¸¦ ´­·¶À» °æ¿ì °ÔÀÓÀ» ÀÏ½Ã Á¤Áö 
     while(1){
         if(s->key==PAUSE){
             gotoxy(MAP_X+(MAP_WIDTH/2)-9,MAP_Y,"< PAUSE : PRESS ANY KEY TO RESUME > ");
@@ -135,11 +135,66 @@ void pause(Game *s){ // pí‚¤ë¥¼ ëˆŒë €ì„ ê²½ìš° ê²Œì„ì„ ì¼ì‹œ ì •ì§€
             
     }
 }
+
+void list(Game *s, int count){
+    printf("\nName            score\n");
+    printf("-----------------------------------\n");
+    for(int i = 0; i < count; i ++){
+    if(s[i].score == -1) continue;
+    printf("%2d ", i+1);
+    readScoreBoard(s[i]);
+    }
+}
+
+int dataNo(Game *s, int count){
+    int no;
+    list(s, count);
+    printf("¹øÈ£´Â (ÃÖ¼Ò: 0)? ");
+    scanf("%d", &no);
+    
+    return no;
+}
+
+void saveDa(Game *s, int count){
+    FILE *fp;
+    fp = fopen("Game.txt", "wt");
+    for(int i = 0; i < count; i++){
+        if(s[i].score == -1) continue;
+        fprintf(fp, "%s %d\n",s[i].userName,s[i].score);
+    }
+    fclose(fp);
+    printf("=> ÀúÀåµÊ!\n");
+}
+
+int loadData(Game *s){
+    int i = 0;
+    FILE *fp;
+    fp = fopen("Snake.txt", "rt");
+    if (fp == NULL){
+        fp = fopen("Snake.txt", "w");
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+5,"+--------------------------+");
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+6,"|        =>ÆÄÀÏ ¾øÀ½!       |");
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+7,"+--------------------------+");
+    }
+    else{
+        fp = fopen("Snake.txt", "rt");
+        for(; i < 100; i++){
+            fscanf(fp, "%s", s[i].userName);
+            if(feof(fp)) break;
+            fscanf(fp, "%d", &s[i].score);
+        }
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+5,"+--------------------------+");
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+6,"|        =>·Îµù ¼º°ø!       |");
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+7,"+--------------------------+");
+    }
+    fclose(fp);
+    return i;
+}
  
-void game_over(Game *s){ //ê²Œì„ì¢…ë£Œ í•¨ìˆ˜ 
+void game_over(Game *s){ //°ÔÀÓÁ¾·á ÇÔ¼ö 
     int index = 0;
     int count = 0;
-    int menu, no;
+    int menu, no, ox;
 
     count = loadData(s);
     index = count;
@@ -147,41 +202,60 @@ void game_over(Game *s){ //ê²Œì„ì¢…ë£Œ í•¨ìˆ˜
     while(1){
         menu = selectMenu();
 
-        if(menu == 0) break;
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+5,"+--------------------------+");
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+6,"|  ·©Å·À» Ãß°¡ÇÏ½Ã°Ú½À´Ï±î?  |");
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+7,"+--------------------------+");
+        scanf("%d", &ox);
+        if(ox == 0)
+            break;
+        else if(ox == 1){
+            count += addScore(&s[index++]);
 
-        if(menu == 1){
-            if(count>0)
-                list(s, index);
-            else
-                printf("ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.\n");
-        }
+            if(menu == 0) break;
 
-        else if(menu == 2){ 
-            count += add(&s[index++]);
-        }
-
-        else if(menu == 3){
-            no = dataNo(s, index);
-            if(no == 0){
-                printf("=> ì·¨ì†Œë¨!\n");
-                continue;
+            if(menu == 1){
+                title(s);
             }
-            update(&s[no-1]);
-        }
 
-        else if(menu == 4){
-            no = dataNo(s, index);
-            if(no == 0){
-                printf("=> ì·¨ì†Œë¨!\n");
-                continue;
+            else if(menu == 2){
+                if(count>0)
+                    list(s, index);
+                else{
+                    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+5,"+--------------------------+");
+                    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+6,"|    =>µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.   |");
+                    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+7,"+--------------------------+");
+                }
             }
-            int deleteok;
-            printf("ì •ë§ë¡œ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?(ì‚­ì œ:1)");
-            scanf("%d", &deleteok);
-            
-            if(deleteok == 1){
-                if(deleteDa(&s[no-1])) 
-                count--;
+
+            else if(menu == 3){
+                no = dataNo(s, index);
+                if(no == 0){
+                    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+5,"+--------------------------+");
+                    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+6,"|        => Ãë¼ÒµÊ!        |");
+                    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+7,"+--------------------------+");
+                    continue;
+                }
+                updateScoreBoard(&s[no-1]);
+            }
+
+            else if(menu == 4){
+                no = dataNo(s, index);
+                if(no == 0){
+                    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+5,"+--------------------------+");
+                    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+6,"|        => Ãë¼ÒµÊ!        |");
+                    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+7,"+--------------------------+");
+                    continue;
+                }
+                int deleteok;
+                gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+5,"+--------------------------+");
+                gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+6,"|  »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?(»èÁ¦:1) |");
+                gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+7,"+--------------------------+");
+                scanf("%d", &deleteok);
+                
+                if(deleteok == 1){
+                    if(deleteMenu(&s[no-1])) 
+                    count--;
+                }
             }
         }
     }
@@ -196,7 +270,7 @@ void game_over(Game *s){ //ê²Œì„ì¢…ë£Œ í•¨ìˆ˜
     
     if(s->score>s->best_score) {
         s->best_score=s->score;
-    gotoxy(MAP_X+(MAP_WIDTH/2)-4,MAP_Y+10,"â˜† BEST SCORE â˜†");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-4,MAP_Y+10,"¡Ù BEST SCORE ¡Ù");
     }
     Sleep(500);
         while (kbhit()) getch();
@@ -206,35 +280,35 @@ void game_over(Game *s){ //ê²Œì„ì¢…ë£Œ í•¨ìˆ˜
 void food(Game *s){
     int i;
     
-    int food_crush_on=0;//foodê°€ ë±€ ëª¸í†µì¢Œí‘œì— ìƒê¸¸ ê²½ìš° on 
-    int r=0; //ë‚œìˆ˜ ìƒì„±ì— ì‚¬ë™ë˜ëŠ” ë³€ìˆ˜ 
-    gotoxy(MAP_X,MAP_Y+MAP_HEIGHT," YOUR SCORE: "); //ì ìˆ˜í‘œì‹œ 
+    int food_crush_on=0;//food°¡ ¹ì ¸öÅëÁÂÇ¥¿¡ »ı±æ °æ¿ì on 
+    int r=0; //³­¼ö »ı¼º¿¡ »çµ¿µÇ´Â º¯¼ö 
+    gotoxy(MAP_X,MAP_Y+MAP_HEIGHT," YOUR SCORE: "); //Á¡¼öÇ¥½Ã 
     printf("%3d, LAST SCORE: %3d, BEST SCORE: %3d", s->score, s->last_score, s->best_score);
     
     while(1){            
         food_crush_on=0;    
-        srand((unsigned)time(NULL)+r); //ë‚œìˆ˜í‘œìƒì„± 
-        s->food_x=(rand()%(MAP_WIDTH-2))+1;    //ë‚œìˆ˜ë¥¼ ì¢Œí‘œê°’ì— ë„£ìŒ 
+        srand((unsigned)time(NULL)+r); //³­¼öÇ¥»ı¼º 
+        s->food_x=(rand()%(MAP_WIDTH-2))+1;    //³­¼ö¸¦ ÁÂÇ¥°ª¿¡ ³ÖÀ½ 
         s->food_y=(rand()%(MAP_HEIGHT-2))+1;
         
-        for(i=0;i<s->length;i++){ //foodê°€ ë±€ ëª¸í†µê³¼ ê²¹ì¹˜ëŠ”ì§€ í™•ì¸  
+        for(i=0;i<s->length;i++){ //food°¡ ¹ì ¸öÅë°ú °ãÄ¡´ÂÁö È®ÀÎ  
             if(s->food_x==s->x[i]&&s->food_y==s->y[i]){
-                food_crush_on=1; //ê²¹ì¹˜ë©´ food_crush_on ë¥¼ on 
+                food_crush_on=1; //°ãÄ¡¸é food_crush_on ¸¦ on 
                 r++;
 break;
             }
         }
         
-        if(food_crush_on==1) continue; //ê²¹ì³¤ì„ ê²½ìš° whileë¬¸ì„ ë‹¤ì‹œ ì‹œì‘ 
+        if(food_crush_on==1) continue; //°ãÃÆÀ» °æ¿ì while¹®À» ´Ù½Ã ½ÃÀÛ 
             
-        gotoxy(MAP_X+s->food_x,MAP_Y+s->food_y,"â˜…"); //ì•ˆê²¹ì³¤ì„ ê²½ìš° ì¢Œí‘œê°’ì— foodë¥¼ ì°ê³  
-        s->speed-=3; //ì†ë„ ì¦ê°€ 
+        gotoxy(MAP_X+s->food_x,MAP_Y+s->food_y,"¡Ú"); //¾È°ãÃÆÀ» °æ¿ì ÁÂÇ¥°ª¿¡ food¸¦ Âï°í 
+        s->speed-=3; //¼Óµµ Áõ°¡ 
         break;
         
     }
 }
 
-void status(Game *s){ //ê°ì¢… ìŠ¤í…Ÿì„ ë³¼ìˆ˜ ìˆëŠ” í•¨ìˆ˜ 
+void status(Game *s){ //°¢Á¾ ½ºÅİÀ» º¼¼ö ÀÖ´Â ÇÔ¼ö 
     gotoxy(MAP_X+MAP_WIDTH+1,MAP_Y,"head= ");
     printf("%2d,%2d",s->x[0],s->y[0]);
     gotoxy(MAP_X+MAP_WIDTH+1,MAP_Y+1,"food= ");
@@ -249,53 +323,38 @@ void status(Game *s){ //ê°ì¢… ìŠ¤í…Ÿì„ ë³¼ìˆ˜ ìˆëŠ” í•¨ìˆ˜
     printf("%3d",s->score);  
 }
 ////////////////////////////////////////////////////////////////
-void list(Game *s, int count){
-    printf("\nName            score\n");
-    printf("-----------------------------------\n");
-    for(int i = 0; i < count; i ++){
-    if(s[i].score == -1) continue;
-    printf("%2d ", i+1);
-    readScoreBoard(s[i]);
-    }
-}
-
-int dataNo(Game *s, int count){
-    int no;
-    list(s, count);
-    printf("ë²ˆí˜¸ëŠ” (ìµœì†Œ: 0)? ");
-    scanf("%d", &no);
-    
-    return no;
-}
 
 int selectMenu(){
     int i, j, menu;
     
-    while (kbhit()) getch(); //ë²„í¼ì— ìˆëŠ” í‚¤ê°’ì„ ë²„ë¦¼ 
+    while (kbhit()) getch(); //¹öÆÛ¿¡ ÀÖ´Â Å°°ªÀ» ¹ö¸² 
 
-    draw_map();    //ë§µ í…Œë‘ë¦¬ë¥¼ ê·¸ë¦¼ 
-    for(i=MAP_Y+1;i<MAP_Y+MAP_HEIGHT-1;i++){ // ë§µ í…Œë‘ë¦¬ ì•ˆìª½ì„ ë¹ˆì¹¸ìœ¼ë¡œ ì±„ì›€ 
+    draw_map();    //¸Ê Å×µÎ¸®¸¦ ±×¸² 
+    for(i=MAP_Y+1;i<MAP_Y+MAP_HEIGHT-1;i++){ // ¸Ê Å×µÎ¸® ¾ÈÂÊÀ» ºóÄ­À¸·Î Ã¤¿ò 
         for(j=MAP_X+1;j<MAP_X+MAP_WIDTH-1;j++) gotoxy(j,i,"  ");
     }
 
     gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+5,"+--------------------------+");
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+6,"|        1. ê²Œì„ ì‹œì‘       |");
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+7,"|        2. ë­í‚¹ ì¡°íšŒ       |");
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+8,"|        3. ë­í‚¹ ì‚­ì œ       |");
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+9,"|        4. ë­í‚¹ ìˆ˜ì •       |");
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+10,"|        5. ê²Œì„ ì¢…ë£Œ       |");
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+11,"+--------------------------+");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+6,"|        1. °ÔÀÓ ½ÃÀÛ      |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+7,"|        2. ·©Å· Á¶È¸      |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+8,"|        3. ·©Å· ¼öÁ¤      |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+9,"|        4. ·©Å· »èÁ¦      |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+10,"|        5. ÆÄÀÏ ÀúÀå      |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+11,"|        5. °ÔÀÓ Á¾·á      |");
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+12,"+--------------------------+");
 
-    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+13," <  SELECT OPTION TO START  > ");
-    scanf("%d", &menu);
-    
+    gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+14," <  SELECT OPTION TO START  > ");
+
     while(1){
-        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+13," <  SELECT OPTION TO START  > ");
+        if(kbhit())
+            break;
+
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+14," <  SELECT OPTION TO START  > ");
         Sleep(400);
-        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+13,"                              ");
+        gotoxy(MAP_X+(MAP_WIDTH/2)-7,MAP_Y+14,"                              ");
         Sleep(400);
-        
     }
 
+    scanf("%d", &menu);
     return menu;
 }

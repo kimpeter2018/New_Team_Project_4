@@ -1,33 +1,32 @@
 #include "user.h"
 
-int addScore(Users *u, Game *s, int score)
+int addScore(Game *s)
 {
   printf("What's your name? ");
-  scanf("%[^\n]", u->userName);
-  score = s->score;
+  scanf("%[^\n]", s->userName);
 
-  printf("==> ì¶”ê°€ë¨!\n");
+  printf("==> Ãß°¡µÊ!\n");
   return 1;
 }
 
-void readScoreBoard(Users u, Game s)
+void readScoreBoard(Game s)
 {
-  printf("%s %dì ", u.userName, s.score);
+  printf("%s %dÁ¡", s.userName, s.score);
 }
 
-int updateMenu(Users *u)
+int updateScoreBoard(Game *s)
 {
   printf("What's your new name? ");
   getchar();
-  scanf("%[^\n]", u->userName);
+  scanf("%[^\n]", s->userName);
 
-  printf("==> ìˆ˜ì •ë¨!\n");
+  printf("==> ¼öÁ¤µÊ!\n");
   return 1;
 }
 
-int deleteMenu(Users *u)
+int deleteMenu(Game *s)
 {
-  u->score = -1;
-  printf("==> ì‚­ì œë¨!\n");
+  s->score = -1;
+  printf("==> »èÁ¦µÊ!\n");
   return 0;
 }
