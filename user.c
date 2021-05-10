@@ -8,13 +8,15 @@ int addScore(Game *s)
 
   scanf("%[^\n]", s->userName);
 
-  gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 5, "<==> Added!>");
+  gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6, "<==> Added!>");
+  gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 7, "<  PRESS ENTER  >");
+>>>>>>> main
   return 1;
 }
 
 void readScoreBoard(Game s)
 {
-  printf("%s %d score", s.userName, s.score);
+  printf("%s %5dPOINTS", s.userName, s.score);
 }
 
 int updateScoreBoard(Game *s)
@@ -23,13 +25,14 @@ int updateScoreBoard(Game *s)
   getchar();
   scanf("%[^\n]", s->userName);
 
-  printf("==> Changed!\n");
+
+  printf("==> YOUR NAME IS UPDATED!\n");
   return 1;
 }
 
 int deleteMenu(Game *s)
 {
   s->score = -1;
-  printf("==> Deleted!\n");
+  printf("==> DELETE COMPLETE!\n");
   return 0;
 }
