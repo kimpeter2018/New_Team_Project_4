@@ -203,7 +203,7 @@ void list(Game *s, int count)
     {
         if (s[i].score == -1)
             continue;
-        gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6);
+        gotoxy(MAP_X + (MAP_WIDTH / 2) - 7, MAP_Y + 6 + i);
         printf("%2d ", i + 1);
         readScoreBoard(s[i]);
     }
