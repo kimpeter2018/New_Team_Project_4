@@ -8,7 +8,7 @@ void pause(Game *s); //일시정지
 void game_over(Game *s); //게임 오버를 확인 
 void food(Game *s); // 음식 생성 
 void status(Game *s); // 개발자용 status표시
-void startGame(Game *s); //게임 시작
+void startGame(Game *s, int *rank); //게임 시작
 int askRank(Game *s); //랭크 여부
 void gotoxy(int x, int y); // xy축
 void ClearScreen();

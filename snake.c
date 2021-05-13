@@ -4,6 +4,7 @@
 ////////////////////////////MAIN START//////////////////////////////
 int main(){
     Game slist[100];
+    int rank[10]= {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int index = 0;
     int count = 0;
     int menu, no;
@@ -19,7 +20,7 @@ int main(){
         switch(menu)
 		{
 			case 1:
-				startGame(slist);
+				startGame(slist, rank);
 				break;
 			case 2:
 				ClearScreen();

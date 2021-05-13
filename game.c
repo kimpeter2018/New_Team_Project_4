@@ -352,7 +352,7 @@ void status(Game *s)
     printf("score= %3d", s->score);
 }
 
-void startGame(Game *s){
+void startGame(Game *s, int *rank){
     title(s);
     int count=0;
     
@@ -384,12 +384,36 @@ void startGame(Game *s){
         count = move(s, s->dir);
         
         if(s->status_on==1) status(s); // statusÇ¥½Ã 
-        if(count == 1) break;
+        if(count == 1){
+            if(s->score>rank[0]){
+				rank[4] = rank[3];
+				rank[3] = rank[2];
+				rank[2] = rank[1];
+				rank[1] = rank[0];
+				rank[0] = s->score;
+			} else if(s->score>rank[1]){
+				rank[4] = rank[3];
+				rank[3] = rank[2];
+				rank[2] = rank[1];
+				rank[1] = s->score;
+			} else if(s->score>rank[2]){
+				rank[4] = rank[3];
+				rank[3] = rank[2];
+				rank[2] = s->score;
+			} else if(s->score>rank[3]){
+				rank[4] = rank[3];
+				rank[3] = s->score;
+			} else if(s->score>rank[4]){
+				rank[4] = s->score;
+			}
+            break;
+        }
     }
 }
 
 int askRank(Game *s){
     int ox;
+    int rank[10]= {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     ClearScreen();
     draw_map(s);
@@ -411,7 +435,7 @@ int askRank(Game *s){
         return 1;
     }
     else if(ox == 0){
-        startGame(s);
+        startGame(s, rank);
         return 0;
     }
     return 0;
