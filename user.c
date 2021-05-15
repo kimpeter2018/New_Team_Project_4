@@ -25,7 +25,7 @@ int addScore(Game *s)
 
 void readScoreBoard(Game s)
 {
-  printf("%s %5d POINTS\n", s.userName, s.score);
+  printf("%s %5d POINTS\n", s.userName, s.rank);
 }
 
 int updateScoreBoard(Game *s)

@@ -33,6 +33,7 @@ typedef struct{
     int key; //입력받은 키 저장 
     int status_on; // 개발자용 status 표시활성화 변수.. 게임중에 S키를 누르면 활성
     int count; //등수 
+    int rank
 } Game;
 
 int addScore(Game *s);
