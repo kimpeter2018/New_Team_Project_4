@@ -1,20 +1,20 @@
 #include"user.h"
 
-void title(Game *s); //°ÔÀÓ ½ÃÀÛÈ­¸é 
-void reset(Game *s); //°ÔÀÓÀ» ÃÊ±âÈ­ 
-void draw_map(); // °ÔÀÓÆÇ Å×µÎ¸®¸¦ ±×¸² 
-int move(Game *s, int dir); //¹ì¸Ó¸®¸¦ ÀÌµ¿ 
-void pause(Game *s); //ÀÏ½ÃÁ¤Áö 
-void game_over(Game *s); //°ÔÀÓ ¿À¹ö¸¦ È®ÀÎ 
-void food(Game *s); // À½½Ä »ý¼º 
-void status(Game *s); // °³¹ßÀÚ¿ë statusÇ¥½Ã
-void startGame(Game *s, int *rank); //°ÔÀÓ ½ÃÀÛ
-int askRank(Game *s); //·©Å© ¿©ºÎ
-void gotoxy(int x, int y); // xyÃà
+void title(Game *s); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ 
+void reset(Game *s); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ 
+void draw_map(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×µÎ¸ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ 
+int move(Game *s, int dir); //ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ 
+void pause(Game *s); //ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+void game_over(Game *s); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ 
+void food(Game *s); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+void status(Game *s); // ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ statusÇ¥ï¿½ï¿½
+void startGame(Game *s, int *rank); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+int askRank(Game *s); //ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½
+void gotoxy(int x, int y); // xyï¿½ï¿½
 void ClearScreen();
 //////////////////////////////////////////////////////////////////////
 void list(Game *s, int count);
 int dataNo(Game *s, int count);
-void SaveDa(Game *s, int count);
+void saveDa(Game *s, int count);
 int loadData(Game *s);
 void selectMenu();

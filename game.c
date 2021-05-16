@@ -225,7 +225,7 @@ int dataNo(Game *s, int count)
 void saveDa(Game *s, int count)
 {
     FILE *fp;
-    fp = fopen("Game.txt", "wt");
+    fp = fopen("Snake.txt", "wt");
     for (int i = 0; i < count; i++)
     {
         if (s[i].score == -1)
