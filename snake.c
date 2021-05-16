@@ -102,7 +102,7 @@ int main()
             char key;
             scanf("%c", &key);
             break;
-        case 0:
+        case 7:
             printf("게임을 종료합니다...\n");
             return 0;
         default:
